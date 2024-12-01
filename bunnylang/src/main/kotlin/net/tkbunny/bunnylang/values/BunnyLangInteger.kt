@@ -2,8 +2,9 @@ package net.tkbunny.bunnylang.values
 
 import net.tkbunny.bunnylang.BunnyLangValue
 import net.tkbunny.bunnylang.values.BunnyLangNumber
+import net.tkbunny.bunnylang.values.BunnyLangString
 
-open class BunnyLangInteger(var num: Long) : BunnyLangNumber(num) {
+open class BunnyLangInteger(private var num: Long) : BunnyLangNumber(num) {
   override val isFunction = false
   override val type = "integer"
   
@@ -29,7 +30,11 @@ open class BunnyLangInteger(var num: Long) : BunnyLangNumber(num) {
   }
 
 
-  open override fun add(operand: BunnyLangValue): BunnyLangInteger {
+  open override fun add(operand: BunnyLangValue): BunnyLangValue {
+    if (operand.type == "string") {
+      return BunnyLangString(num.toString() + " " + operand.toString())
+    }
+
     return add(BunnyLangInteger(operand.getKotlinValue().toString().toLong()))
   }
   open override fun sub(operand: BunnyLangValue): BunnyLangInteger {

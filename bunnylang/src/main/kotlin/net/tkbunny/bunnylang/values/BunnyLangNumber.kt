@@ -22,7 +22,7 @@ open class BunnyLangNumber(private var valu: Number) : BunnyLangValue(valu) {
     return this
   }
 
-  open override fun add(operand: BunnyLangValue): BunnyLangNumber {
+  open override fun add(operand: BunnyLangValue): BunnyLangValue {
     return add(BunnyLangNumber(operand.getKotlinValue().toString().toLong()))
   }
   open override fun sub(operand: BunnyLangValue): BunnyLangNumber {

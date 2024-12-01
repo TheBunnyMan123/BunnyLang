@@ -28,7 +28,11 @@ open class BunnyLangDouble(var num: Double) : BunnyLangNumber(num) {
     return this
   }
 
-  open override fun add(operand: BunnyLangValue): BunnyLangDouble {
+  open override fun add(operand: BunnyLangValue): BunnyLangValue {
+    if (operand.type == "string") {
+      return BunnyLangString(num.toString() + " " + operand.toString())
+    }
+
     return add(BunnyLangDouble(operand.getKotlinValue().toString().toDouble()))
   }
   open override fun sub(operand: BunnyLangValue): BunnyLangDouble {

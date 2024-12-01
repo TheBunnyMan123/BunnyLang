@@ -3,14 +3,23 @@ set ans
 "(3" "+" + "2)" + "*" + "9" + "==" + ans +
 println
 
+"Calculating" "the" + "factorial" + "of" + "9" +
+println
+
 9
 set iter
 1
 set ans
 iter
 loop
+  ">" iter + "*" + ans + "==" + "" +
+  print
+
   ans iter *
   set ans
+
+  ans
+  println
 
   iter 1 -
   set iter

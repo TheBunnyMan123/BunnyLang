@@ -1,10 +1,14 @@
 package net.tkbunny.bunnylang
 
+import net.tkbunny.bunnylang.values.BunnyLangString
+
 open class BunnyLangValue(private val value: Any?) {
   open val isFunction: Boolean = false
   open val type: String = "generic"
 
-  open fun add(operand: BunnyLangValue): BunnyLangValue {println(this.type);error("This value does not support adding")}
+  open fun add(operand: BunnyLangValue): BunnyLangValue {
+    return BunnyLangString(this.toString() + " " + operand.toString())
+  }
   open fun sub(operand: BunnyLangValue): BunnyLangValue {error("This value does not support subtracting")}
   open fun mul(operand: BunnyLangValue): BunnyLangValue {error("This value does not support multiplication")}
   open fun div(operand: BunnyLangValue): BunnyLangValue {error("This value does not support division")}

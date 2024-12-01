@@ -17,7 +17,7 @@ class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
   private val intRegex: Regex = Regex("^[0-9]$")
   private val stringRegex: Regex = Regex("^\"(.*)\"$")
   private val setRegex: Regex = Regex("^set .*$")
-  private val whitespaceRegex: Regex = Regex("^\\s")
+  private val whitespaceRegex: Regex = Regex("^\\s*")
 
   fun isNumber(arg: Any): Boolean {
     if (arg is Int || arg is Double || arg is Long || arg is Float || numberRegex.matches(arg.toString())) {
@@ -173,6 +173,7 @@ class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
       } else if (line == "print") {
         out += stack.pop().toString()
       } else if (line == "println") {
+        println(stack.last())
         out += stack.pop().toString() + "\n"
       } else if (line == "duplicate") {
         val toDupe = stack.last()
