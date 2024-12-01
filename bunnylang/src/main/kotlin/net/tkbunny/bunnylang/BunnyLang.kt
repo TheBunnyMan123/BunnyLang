@@ -204,7 +204,7 @@ class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
         val loopNum = loops.pop()
         val check = stack.last()
 
-        if (check.getKotlinValue() == 0) {
+        if (check.getKotlinValue().toString().toLong() <= 0) {
           lineNum++
         } else {
           lineNum = loopNum
