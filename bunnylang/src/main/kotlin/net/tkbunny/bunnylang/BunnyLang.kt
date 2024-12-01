@@ -7,9 +7,10 @@ import net.tkbunny.bunnylang.values.BunnyLangInteger
 import net.tkbunny.bunnylang.values.BunnyLangString
 import java.util.Stack
 
-class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
+class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE, val LOOP_LIMIT: Long = 1500) {
   val stack: Stack<BunnyLangValue> = Stack()
   var instructions = 0
+  var loopCount = 0
 
   private val vars: HashMap<String, BunnyLangValue> = HashMap()
 
@@ -158,6 +159,12 @@ class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
     var lineNum= 0
 
     while (lineNum < lines.size) {
+      if (instructions > INSTRUCTION_LIMIT) {
+        error("Exceeded instruction limit of " + INSTRUCTION_LIMIT)
+      } else if (loopCount > LOOP_LIMIT) {
+        error("Exceeded loop limit of " + LOOP_LIMIT)
+      }
+
       instructions++
       val line = whitespaceRegex.replace(lines.get(lineNum), "")
 
@@ -184,6 +191,7 @@ class BunnyLang(val INSTRUCTION_LIMIT: Long = Long.MAX_VALUE) {
 
         if (check.getKotlinValue().toString().toLong() > 0) {
           loops.push(lineNum)
+          loopCount++
           lineNum++
         } else {
           var loopCount = 1
