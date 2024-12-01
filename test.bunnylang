@@ -1,0 +1,23 @@
+3 2 + 9 *
+set ans
+"(3" "+" + "2)" + "*" + "9" + "==" + ans +
+println
+
+9
+set iter
+1
+set ans
+iter
+loop
+  ans iter *
+  set ans
+
+  iter 1 -
+  set iter
+
+  iter
+end
+
+"9!" "==" + ans +
+println
+
